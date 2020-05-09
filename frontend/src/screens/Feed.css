@@ -1,6 +1,7 @@
 .wrapper{
     background-color: red;
     background-image: url('/space.jpg');
+    min-height: 100vh;
     height: auto;
     background-size: cover;
     background-attachment: fixed;

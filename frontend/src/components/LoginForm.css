@@ -1,0 +1,38 @@
+.login-form{
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.input-login{
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    outline: none;
+}
+
+.button-login{
+    width: 100%;
+    background-color: #651fff;
+    color: white;
+    padding: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.login-image{
+    background-image: url('/logo.png');
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    margin: 10px 0;
+}
+
+.login-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
