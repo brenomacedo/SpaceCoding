@@ -11,10 +11,16 @@
     padding: 10px;
 }
 
-.add-post h3{
+.add-post .add-post-header h3{
     color: white;
     padding: 3px;
     text-align: center;
+}
+
+.add-post-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .add-post textarea{
