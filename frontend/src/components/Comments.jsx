@@ -1,7 +1,7 @@
 import React from 'react'
 import './Comments.css'
 import Comment from './Comment'
-
+import AddComment from './AddComment'
 
 const initial_state = {
     posts: [
@@ -30,6 +30,6 @@ export default props => (
         <Comment />
         <Comment />
         <Comment />
-        
+        <AddComment />
     </div>
 )
