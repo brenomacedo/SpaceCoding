@@ -8,5 +8,7 @@ export default props => (
         <Post />
         <Post />
         <Post />
+        <Post />
+        <Post />
     </div>
 )
