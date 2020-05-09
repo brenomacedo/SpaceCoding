@@ -3,7 +3,7 @@ import './Login.css'
 import LoginForm from '../components/LoginForm'
 
 export default props => (
-    <div class="login-wrapper">
+    <div className="login-wrapper">
         <LoginForm />
     </div>
 )

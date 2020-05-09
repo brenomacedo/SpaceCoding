@@ -3,6 +3,6 @@ import Post from './Post'
 
 export default props => (
     <div style={{ paddingTop: 20, paddingBottom: 20 }}>
-        
+        <Post />
     </div>
 )
