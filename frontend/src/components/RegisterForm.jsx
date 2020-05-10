@@ -11,6 +11,28 @@ export default props => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
+    const handleImage = (value, files) => {
+
+        if(!files){
+            return false
+        }
+
+        if(files.type !== 'image/jpeg' && files.type !== 'image/png') {
+            setImagePath('FORMATO DE IMAGEM INVÁLIDO!')
+            return false
+        }
+
+        setImagePath(value.split('\\').reverse()[0])
+        let reader = new FileReader()
+        reader.readAsDataURL(files)
+        reader.onload = () => {
+            setImage(reader.result.split(',')[1])
+        }
+        reader.onerror = () => {
+            console.log('ocorreu um erro inesperado!')
+        }
+    }
+
 
     return (
         <div className="login-form">
@@ -18,17 +40,8 @@ export default props => {
                 <label htmlFor='image-input' className='register-image'>
                     <FaCamera size={20} color='black' />
                 </label>
-                <input type='file' id='image-input' onChange={e => {
-                    setImagePath(e.target.value.split('\\').reverse()[0])
-                    let reader = new FileReader()
-                    reader.readAsDataURL(e.target.files[0])
-                    reader.onload = () => {
-                        setImage(reader.result.split(',')[1])
-                    }
-                    reader.onerror = () => {
-                        console.log('ocorreu um erro inesperado!')
-                    }
-                }} />
+                <input type='file' id='image-input'
+                onChange={e => handleImage(e.target.value, e.target.files[0])} />
                 {imagePath}
             </div>
             <input value={username} type="text" className="input-login" placeholder='username'
