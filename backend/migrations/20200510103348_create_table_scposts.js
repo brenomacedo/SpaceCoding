@@ -3,6 +3,7 @@ exports.up = function(knex) {
         table.increments('id').primary()
         table.string('author').notNull()
         table.string('description').notNull()
+        table.string('image')
         table.integer('userId').references('id')
         .inTable('users').notNull()
     })
