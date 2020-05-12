@@ -12,9 +12,7 @@ exports.createComment = (req, res) => {
 }
 
 exports.getComment = (req, res) => {
-    knex('comments').where({
-        postId: req.query.postId
-    })
+    knex('comments').select()
     .then(resp => res.json(resp))
     .catch(err => res.send(err))
 }

@@ -3,6 +3,8 @@ import Feed from './screens/Feed'
 import Login from './screens/Login'
 import Register from './screens/Register'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:3003'
 
 
 

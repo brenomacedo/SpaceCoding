@@ -2,6 +2,7 @@ import React from 'react'
 import Post from './Post'
 import axios from 'axios'
 
+
 export default class Posts extends React.Component{
 
     state = {
@@ -9,7 +10,7 @@ export default class Posts extends React.Component{
     }
 
     componentDidMount = async () => {
-        const posts = await axios.get('http://localhost:3003/posts')
+        const posts = await axios.get('posts')
         this.setState({
             posts: posts.data
         })
@@ -17,7 +18,6 @@ export default class Posts extends React.Component{
 
     renderRows = () => {
         const list = this.state.posts
-        console.log(list)
         return list.map((item, index) => (
             <Post {...item} key={index} />
         ))

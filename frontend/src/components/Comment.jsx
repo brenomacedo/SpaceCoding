@@ -5,10 +5,10 @@ export default props => (
     <div className="comment-wrapper">
         <div className="comment-author">
             <div className="comment-author-image"></div>
-            <div className="comment-author-name">Cleiton Cleitoso</div>
+            <div className="comment-author-name">{props.author}</div>
         </div>
         <div className="comment">
-            <h4>Muito legal, adorei o post, se possível, faça um vídeo sobre angular js.</h4>
+            <h4>{props.comment}</h4>
         </div>
     </div>
 )
