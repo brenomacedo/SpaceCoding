@@ -4,24 +4,7 @@ import Comment from './Comment'
 import AddComment from './AddComment'
 import axios from 'axios'
 
-const initial_state = {
-    posts: [
-        {
-            description: 'Preciso de Ajuda com isso!',
-            image: 'https://i.imgur.com/83smU7B.jpg',
-            author: 'Breno Macêdo',
-            comments: [
-                {
-                    author: 'Pedro',
-                    comment: 'Legal!'
-                }, {
-                    author: 'Joao',
-                    comment: 'Massa!'
-                }
-            ]
-        }
-    ]
-}
+
 
 export default class Comments extends React.Component{
 
@@ -38,8 +21,8 @@ export default class Comments extends React.Component{
 
     renderComments = () => {
         const list = this.state.comments.filter(item => item.postId === this.props.postId)
-        return list.map(item => (
-            <Comment {...item} />
+        return list.map((item, index) => (
+            <Comment {...item} key={index} />
         ))
     }
 

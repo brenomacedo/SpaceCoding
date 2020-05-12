@@ -13,10 +13,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
             <Switch>
-                <Route path='/' exact component={Feed} />
+                <Route path='/' exact component={Login} />
                 <Route path='/register' exact component={Register} />
                 <Route path='/profile' exact component={Feed} />
-                <Redirect from='*' to='login' />
+                <Redirect from='*' to='/' />
             </Switch>
         </BrowserRouter>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaCamera } from 'react-icons/fa'
 import './LoginForm.css'
+import { useHistory } from 'react-router-dom'
 
 export default props => {
 
@@ -10,6 +11,11 @@ export default props => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const history = useHistory()
+
+    const login = () => {
+        history.push('/')
+    }
 
     const handleImage = (value, files) => {
 
@@ -53,7 +59,7 @@ export default props => {
             <input value={confirmPassword} type="password" className="input-login" placeholder='confirm your password'
             onChange={e => setConfirmPassword(e.target.value)} />
             <button className='button-login' >LOGIN</button>
-            <h5>Do you already have an account? <button>Login</button></h5>
+            <h5>Do you already have an account? <button onClick={login} >Login</button></h5>
         </div>
     )
 }
