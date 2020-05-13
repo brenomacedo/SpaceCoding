@@ -7,13 +7,17 @@ exports.createUser = async (req, res) => {
 
     const password = await bcrypt.hash(req.body.password, 10)
 
-    knex('users').insert({
+    const token = jwt.sign({}, key, { expiresIn: '86400' })
+
+    const user = {
         name: req.body.name,
         username: req.body.username,
         email: req.body.email,
         password: password,
         image: req.body.image
-    }).then(resp => res.send('SUCESSO'))
+    }
+
+    knex('users').insert(user).then(resp => res.json({ user, token }))
     .catch(err => res.send(err))
 }
 
@@ -32,6 +36,6 @@ exports.getUser = async (req, res) => {
         return res.send('USUARIO OU SENHA INCORRETOS')
     }
 
-    return res.json({User, token})
+    return res.json({user: User, token})
 
 }

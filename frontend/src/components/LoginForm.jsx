@@ -13,7 +13,8 @@ export default props => {
         const user = await axios.get(`/user?email=${email}&password=${password}&username=${email}`)
 
         if(user.data) {
-            history.push('/profile', { user: user.data })
+            axios.defaults.headers.common['authorization'] = `Bearer ${user.data.token}`
+            history.push('/profile', { user: user.data.user })
         }
     }
 

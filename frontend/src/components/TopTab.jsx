@@ -1,6 +1,7 @@
 import React from 'react'
 import './TopTab.css'
 import { useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 export default props => {
 
@@ -11,7 +12,10 @@ export default props => {
     return (
         <div className="top-tab">
             <div className="menu">
-                <h4>Profile</h4>
+                <h4 onClick={async () => {
+                    const i = await axios.get('/test')
+                    alert(i.data.deu)
+                }}>Profile</h4>
                 <h4>About</h4>
                 <h4>Logout</h4>
             </div>

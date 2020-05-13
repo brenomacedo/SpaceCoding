@@ -11,5 +11,8 @@ router.post('/user', createUser)
 router.get('/user', getUser)
 router.post('/comment', auth, createComment)
 router.get('/comment', getComment)
+router.get('/test', auth, (req, res) => {
+    return res.json({ deu: 'certo' })
+})
 
 module.exports = router
