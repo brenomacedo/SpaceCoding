@@ -14,6 +14,7 @@ export default props => {
 
         if(user.data) {
             axios.defaults.headers.common['authorization'] = `Bearer ${user.data.token}`
+            localStorage.setItem('token', `Bearer ${user.data.token}`)
             history.push('/profile', { user: user.data.user })
         }
     }

@@ -57,6 +57,7 @@ export default props => {
             axios.post('/user', user)
                 .then(res => {
                     axios.defaults.headers.common['authorization'] = res.data.token
+                    localStorage.setItem('token', `Bearer ${res.data.token}`)
                     history.push('/profile', { user })
                 })
                 .catch(err => {
