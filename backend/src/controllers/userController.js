@@ -7,7 +7,6 @@ exports.createUser = async (req, res) => {
 
     const password = await bcrypt.hash(req.body.password, 10)
 
-    const token = jwt.sign({}, key, { expiresIn: 86400 })
 
     const user = {
         name: req.body.name,
@@ -17,7 +16,7 @@ exports.createUser = async (req, res) => {
         image: req.body.image
     }
 
-    knex('users').insert(user).then(resp => res.json({ user, token }))
+    knex('users').insert(user).then(resp => res.json({ user }))
     .catch(err => res.send(err))
 }
 
@@ -26,16 +25,16 @@ exports.getUser = async (req, res) => {
     .orWhere({ email: req.query.email })
     .first()
 
-    const token = jwt.sign({ id: User.id }, key, { expiresIn: 86400 })
-
+    
     if(!User) {
         return res.send('USUARIO OU SENHA INCORRETOS')
     }
-
+    
     if(!await bcrypt.compare(req.query.password, User.password)) {
         return res.send('USUARIO OU SENHA INCORRETOS')
     }
-
+    
+    const token = jwt.sign({ id: User.id }, key, { expiresIn: 86400 })
     return res.json({user: User, token})
 
 }

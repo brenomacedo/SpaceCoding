@@ -9,7 +9,42 @@ const storage = new Storage({
 })
 
 
-exports.uploadImage = functions.https.onRequest((request, response) => {
+exports.uploadUserImage = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        try{
+            fs.writeFileSync('/tmp/imageToSave.png', request.body.image, 'base64')
+            const bucket = storage.bucket('spacecoding-16607.appspot.com/')
+            const id = uuid()
+            bucket.upload('/tmp/imageToSave.png', {
+                uploadType: 'media',
+                destination: `users/${id}.png`,
+                metadata: {
+                    metadata: {
+                        contentType: 'image/png',
+                        firebaseStorageDownloadTokens: id
+                    }
+                }
+            }, (err, file) => {
+                if (err) {
+                    return response.status(500).json({ error: err })
+                } else {
+                    const fileName = encodeURIComponent(file.name)
+                    const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/'
+                        + bucket.name + '/o/' + fileName + '?alt=media&token=' + id
+                    return response.status(201).json({
+                        imageUrl: imageUrl,
+                        destination: `users/${id}.png`
+                    })
+                }
+            })
+        } catch(err) {
+            console.log(err)
+            return response.status(500).json({ error: err })
+        }
+    })
+})
+
+exports.uploadPostImage = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         try{
             fs.writeFileSync('/tmp/imageToSave.png', request.body.image, 'base64')

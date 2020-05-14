@@ -42,7 +42,7 @@ export default props => {
 
     const register = async () => {
 
-        axios.post('https://us-central1-spacecoding-16607.cloudfunctions.net/uploadImage', {
+        axios.post('https://us-central1-spacecoding-16607.cloudfunctions.net/uploadUserImage', {
             image
         }).then(resp => {
 
@@ -58,7 +58,7 @@ export default props => {
                 .then(res => {
                     axios.defaults.headers.common['authorization'] = res.data.token
                     localStorage.setItem('token', `Bearer ${res.data.token}`)
-                    history.push('/profile', { user })
+                    history.push('/login')
                 })
                 .catch(err => {
                     axios
@@ -89,7 +89,7 @@ export default props => {
             onChange={e => setEmail(e.target.value)} />
             <input value={password} type="password" className="input-login" placeholder='password'
             onChange={e => setPassword(e.target.value)} />
-            <button className='button-login' onClick={register} >LOGIN</button>
+            <button className='button-login' onClick={register} >REGISTER</button>
             <h5>Do you already have an account? <button onClick={login} >Login</button></h5>
         </div>
     )

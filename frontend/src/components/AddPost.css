@@ -35,3 +35,15 @@
     padding: 6px;
     resize: none;
 }
+
+.add-post button{
+    border: 0;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}

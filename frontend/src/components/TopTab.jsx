@@ -1,13 +1,10 @@
 import React from 'react'
 import './TopTab.css'
-import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 export default props => {
 
-
-    const location = useLocation()
-    const user = location.state.user
+    const user = props.user
 
     return (
         <div className="top-tab">

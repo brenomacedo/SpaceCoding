@@ -1,12 +1,15 @@
 const knex = require('../../config/db')
 
 exports.postCreate = (req, res) => {
-    knex('posts').insert({
+
+    const post = {
         author: req.body.author,
         description: req.body.description,
         image: req.body.image,
         userId: req.body.userId
-    }).then(resp => res.send('SUCESSO!'))
+    }
+
+    knex('posts').insert(post).then(resp => res.json(post))
     .catch(err => res.send(err))
 }
 
