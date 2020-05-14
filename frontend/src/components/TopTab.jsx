@@ -1,20 +1,22 @@
 import React from 'react'
 import './TopTab.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 export default props => {
 
     const user = props.user
+    const history = useHistory()
 
     return (
         <div className="top-tab">
             <div className="menu">
-                <h4 onClick={async () => {
-                    const i = await axios.get('/test')
-                    alert(i.data.deu)
-                }}>Profile</h4>
+                <h4>Profile</h4>
                 <h4>About</h4>
-                <h4>Logout</h4>
+                <h4 onClick={() => {
+                    localStorage.clear()
+                    history.push('/')
+                }}>Logout</h4>
             </div>
             <div className="info">
                 <div style={{

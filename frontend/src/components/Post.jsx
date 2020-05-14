@@ -18,7 +18,7 @@ export default class Post extends Component {
                     <div className='image' style={{ backgroundImage: `url(${this.props.image})` }}>
 
                     </div>
-                    <Comments postId={this.props.id} />
+                    <Comments userLogged={this.props.userLogged} postId={this.props.id} />
                 </div>
             </div>
         )

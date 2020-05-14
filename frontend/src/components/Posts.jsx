@@ -51,7 +51,8 @@ export default class Posts extends React.Component{
     renderRows = () => {
         const list = this.state.posts.reverse()
         return list.map((item, index) => (
-            <Post {...item} key={index} />
+            <Post userLogged={{author: this.props.user.name, id: this.props.user.id}}
+            {...item} key={index} />
         ))
     }
 
