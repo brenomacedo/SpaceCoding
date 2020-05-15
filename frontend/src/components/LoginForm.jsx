@@ -8,6 +8,17 @@ export default props => {
     const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [status, setStatus] = useState(false)
+
+    const verifyNullCamps = (password, email) => {
+        if(password === '' || email === '') {
+            setStatus(false)
+            return
+        }
+
+        setStatus(true)
+        
+    }
 
     const login = async () => {
         const user = await axios.get(`/user?email=${email}&password=${password}&username=${email}`)
@@ -31,10 +42,22 @@ export default props => {
                 <h3>SpaceCoding</h3>
             </div>
             <input value={email} type="email" className="input-login" placeholder='email'
-            onChange={e => setEmail(e.target.value)} />
+            onChange={e => {
+                verifyNullCamps(password, e.target.value)
+                setEmail(e.target.value)
+            }} />
             <input value={password} type="password" className="input-login" placeholder='password'
-            onChange={e => setPassword(e.target.value)} />
-            <button className='button-login' onClick={login} >LOGIN</button>
+            onChange={e => {
+                verifyNullCamps(e.target.value, email)
+                setPassword(e.target.value)
+            }} />
+            <button className='button-login' onClick={() => {
+                if(status) {
+                    login()
+                }
+            }} style={{
+                backgroundColor: status ? '#651fff' : '#a2a2a3'
+            }} >LOGIN</button>
             <h5>Don't have an account? <button onClick={register}>Register</button></h5> 
         </div>
     )
