@@ -22,6 +22,11 @@
     cursor: pointer;
 }
 
+.warning{
+    color: red;
+    margin-bottom: 3px;
+}
+
 .login-image{
     background-image: url('/logo.png');
     width: 50px;
