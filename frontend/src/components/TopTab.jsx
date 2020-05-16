@@ -1,6 +1,5 @@
 import React from 'react'
 import './TopTab.css'
-import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
 export default props => {
@@ -11,7 +10,6 @@ export default props => {
     return (
         <div className="top-tab">
             <div className="menu">
-                <h4>About</h4>
                 <h4 onClick={() => {
                     localStorage.clear()
                     history.push('/')

@@ -1,7 +1,6 @@
 import React from 'react'
 import './Comments.css'
 import Comment from './Comment'
-import AddComment from './AddComment'
 import axios from 'axios'
 import { FaArrowRight } from 'react-icons/fa'
 import './AddComment.css'
