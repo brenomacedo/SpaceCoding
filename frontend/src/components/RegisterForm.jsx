@@ -15,6 +15,7 @@ export default props => {
     const [name, setName] = useState('')
     const [status, setStatus] = useState(false)
     const [warnings, setWarnings] = useState({})
+    const [registering, setRegistering] = useState(false)
     const history = useHistory()
 
     const verifyPassword = password => {
@@ -159,6 +160,9 @@ export default props => {
                     .post('https://us-central1-spacecoding-16607.cloudfunctions.net/deleteImage' , {
                         filename: resp.data.destination
                     })
+                    alert('an unexpected error ocurred')
+                    setRegistering(false)
+                    setStatus(true)
                 })
         })
         .catch(err => console.log(err))
@@ -175,31 +179,31 @@ export default props => {
                 onChange={e => handleImage(e.target.value, e.target.files[0])} />
                 {imagePath}
             </div>
-            <input value={name} type="text" className="input-login" placeholder='name'
+            <input readOnly={registering} value={name} type="text" className="input-login" placeholder='name'
             onChange={e => {
                 setName(e.target.value)
                 verifyName(e.target.value)
                 verifyingBlanks({ name: e.target.value })
             }} />
-            <input value={username} type="text" className="input-login" placeholder='username'
+            <input readOnly={registering} value={username} type="text" className="input-login" placeholder='username'
             onChange={e => {
                 setUsername(e.target.value)
                 verifyUsername(e.target.value)
                 verifyingBlanks({ username: e.target.value })
             }} />
-            <input value={email} type="email" className="input-login" placeholder='email'
+            <input readOnly={registering} value={email} type="email" className="input-login" placeholder='email'
             onChange={e => {
                 setEmail(e.target.value)
                 verifyEmail(e.target.value)
                 verifyingBlanks({ email: e.target.value })
             }} />
-            <input value={password} type="password" className="input-login" placeholder='password'
+            <input readOnly={registering} value={password} type="password" className="input-login" placeholder='password'
             onChange={e => {
                 setPassword(e.target.value)
                 verifyPassword(e.target.value)
                 verifyingBlanks({ password: e.target.value })
             }} />
-            <input value={confirmPassword} type="password" className="input-login"
+            <input readOnly={registering} value={confirmPassword} type="password" className="input-login"
             placeholder='confirmPassword' onChange={e => {
                 setConfirmPassword(e.target.value)
                 verifyConfirmPassword(e.target.value)
@@ -211,8 +215,9 @@ export default props => {
             <div className="warning">{warnings.password}</div>
             <div className="warning">{warnings.confirmPassword}</div>
             <button className='button-login' onClick={() => {
-                console.log(warnings)
                 if(status)
+                    setRegistering(true)
+                    setStatus(false)
                     register()
             }}
             style={{ backgroundColor: status ? '#651fff' : '#a2a2a3' }} >REGISTER</button>

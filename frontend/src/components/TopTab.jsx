@@ -11,7 +11,6 @@ export default props => {
     return (
         <div className="top-tab">
             <div className="menu">
-                <h4>Profile</h4>
                 <h4>About</h4>
                 <h4 onClick={() => {
                     localStorage.clear()

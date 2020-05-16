@@ -9,6 +9,7 @@ export default props => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState(false)
+    const [loggingin, setLoggingIn] = useState(false)
 
     const verifyNullCamps = (password, email) => {
         if(password === '' || email === '') {
@@ -41,18 +42,20 @@ export default props => {
                 <div className='login-image'></div>
                 <h3>SpaceCoding</h3>
             </div>
-            <input value={email} type="email" className="input-login" placeholder='email'
+            <input readOnly={loggingin} value={email} type="email" className="input-login" placeholder='email'
             onChange={e => {
                 verifyNullCamps(password, e.target.value)
                 setEmail(e.target.value)
             }} />
-            <input value={password} type="password" className="input-login" placeholder='password'
+            <input readOnly={loggingin} value={password} type="password" className="input-login" placeholder='password'
             onChange={e => {
                 verifyNullCamps(e.target.value, email)
                 setPassword(e.target.value)
             }} />
             <button className='button-login' onClick={() => {
                 if(status) {
+                    setLoggingIn(true)
+                    setStatus(false)
                     login()
                 }
             }} style={{
