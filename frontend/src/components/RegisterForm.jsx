@@ -139,7 +139,7 @@ export default props => {
 
         axios.post('https://us-central1-spacecoding-16607.cloudfunctions.net/uploadUserImage', {
             image
-        }).then(resp => {
+        }).then(async resp => {
 
             const user = {
                 name,
@@ -149,21 +149,24 @@ export default props => {
                 image: resp.data.imageUrl
             }
 
-            axios.post('/user', user)
-                .then(res => {
-                    axios.defaults.headers.common['authorization'] = res.data.token
-                    localStorage.setItem('token', `Bearer ${res.data.token}`)
-                    history.push('/login')
+            try{
+                await axios.post('/user', user)
+                history.push('/login')
+            }catch(err){
+                console.log(err)
+                axios
+                .post('https://us-central1-spacecoding-16607.cloudfunctions.net/deleteImage' , {
+                    filename: resp.data.destination
                 })
-                .catch(err => {
-                    axios
-                    .post('https://us-central1-spacecoding-16607.cloudfunctions.net/deleteImage' , {
-                        filename: resp.data.destination
-                    })
-                    alert('an unexpected error ocurred')
-                    setRegistering(false)
-                    setStatus(true)
-                })
+                alert('an unexpected error ocurred')
+                setWarnings({...warnings, user: 'THIS USER IS ALREADY REGISTERED'})
+                setRegistering(false)
+                setStatus(true)
+            }
+            
+                
+            
+                
         })
         .catch(err => console.log(err))
     }
@@ -214,6 +217,7 @@ export default props => {
             <div className="warning">{warnings.email}</div>
             <div className="warning">{warnings.password}</div>
             <div className="warning">{warnings.confirmPassword}</div>
+            <div className="warning">{warnings.user}</div>
             <button className='button-login' onClick={() => {
                 if(status)
                     setRegistering(true)

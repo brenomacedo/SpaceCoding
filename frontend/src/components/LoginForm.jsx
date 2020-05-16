@@ -10,6 +10,7 @@ export default props => {
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState(false)
     const [loggingin, setLoggingIn] = useState(false)
+    const [warning, setWarning] = useState('')
 
     const verifyNullCamps = (password, email) => {
         if(password === '' || email === '') {
@@ -22,12 +23,17 @@ export default props => {
     }
 
     const login = async () => {
-        const user = await axios.get(`/user?email=${email}&password=${password}&username=${email}`)
-
-        if(user.data) {
-            axios.defaults.headers.common['authorization'] = `Bearer ${user.data.token}`
-            localStorage.setItem('token', `Bearer ${user.data.token}`)
-            history.push('/profile', { user: user.data.user })
+        try{
+            const user = await axios.get(`/user?email=${email}&password=${password}&username=${email}`)
+            if(user.data) {
+                axios.defaults.headers.common['authorization'] = `Bearer ${user.data.token}`
+                localStorage.setItem('token', `Bearer ${user.data.token}`)
+                history.push('/profile', { user: user.data.user })
+            }
+        }catch(err){
+            setWarning('USUARIO OU SENHA INCORRETOS!')
+            setStatus(true)
+            setLoggingIn(false)
         }
     }
 
@@ -52,6 +58,7 @@ export default props => {
                 verifyNullCamps(e.target.value, email)
                 setPassword(e.target.value)
             }} />
+            <div className='warning'>{warning}</div>
             <button className='button-login' onClick={() => {
                 if(status) {
                     setLoggingIn(true)
@@ -61,7 +68,7 @@ export default props => {
             }} style={{
                 backgroundColor: status ? '#651fff' : '#a2a2a3'
             }} >LOGIN</button>
-            <h5>Don't have an account? <button onClick={register}>Register</button></h5> 
+            <h5>Don't have an account? <button onClick={register}>Register</button></h5>
         </div>
     )
 }

@@ -27,11 +27,11 @@ exports.getUser = async (req, res) => {
 
     
     if(!User) {
-        return res.send('USUARIO OU SENHA INCORRETOS')
+        return res.status(500).send('USUARIO OU SENHA INCORRETOS')
     }
     
     if(!await bcrypt.compare(req.query.password, User.password)) {
-        return res.send('USUARIO OU SENHA INCORRETOS')
+        return res.status(500).send('USUARIO OU SENHA INCORRETOS')
     }
     
     const token = jwt.sign({ id: User.id }, key, { expiresIn: 86400 })
