@@ -3,6 +3,17 @@
 <h3>- 💾 Knex</h3>
 <h3>- 📱 ReactJs</h3>
 <h3>- ✅ NodeJs</h3>
+<h3>- 🔥 Firebase</h3>
+<h3>- 💽 SQLite</h3>
+
+<h2 align="center">Some screenshots:</h2>
+
+<p align="center">
+    <img src="https://i.imgur.com/YWHecBO.png">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/nhH1hdT.png">
+</p>
 
 <h2>Getting started:</h2>
 <ul>
@@ -12,4 +23,4 @@
     <li><h3>- Enter in localhost:3000</h3></li>
 </ul>
 
-<h2>The icons used in this project was taken in the site Flaticon.com</h2>
+Icons made by <a href="https://www.flaticon.com/br/icone-gratis/foguete_599193?term=rocket&page=2&position=14" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/br/" title="Flaticon"> www.flaticon.com</a>
